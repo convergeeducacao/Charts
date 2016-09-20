@@ -565,9 +565,7 @@ public class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
     {
         // if there is no marker view or drawing marker is disabled
         guard
-            let marker = marker
-            where isDrawMarkersEnabled &&
-                valuesToHighlight()
+            let marker = marker where isDrawMarkersEnabled && valuesToHighlight()
             else { return }
         
         for i in 0 ..< _indicesToHighlight.count
@@ -576,7 +574,7 @@ public class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
             
             guard let
                 set = data?.getDataSetByIndex(highlight.dataSetIndex),
-                e = _data?.entryForHighlight(highlight)
+                let e = _data?.entryForHighlight(highlight)
                 else { continue }
             
             let entryIndex = set.entryIndex(entry: e)
@@ -823,13 +821,13 @@ public class ChartViewBase: NSUIView, ChartDataProvider, AnimatorDelegate
         if (opaque || !transparent)
         {
             // Background color may be partially transparent, we must fill with white if we want to output an opaque image
-            CGContextSetFillColorWithColor(context, NSUIColor.whiteColor().CGColor)
-            CGContextFillRect(context, rect)
+            CGContextSetFillColorWithColor(context!, NSUIColor.whiteColor().CGColor)
+            CGContextFillRect(context!, rect)
             
             if (self.backgroundColor !== nil)
             {
-                CGContextSetFillColorWithColor(context, self.backgroundColor?.CGColor)
-                CGContextFillRect(context, rect)
+                CGContextSetFillColorWithColor(context!, (self.backgroundColor?.CGColor)!)
+                CGContextFillRect(context!, rect)
             }
         }
         
