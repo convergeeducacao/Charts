@@ -332,6 +332,12 @@ public class PieChartRenderer: ChartDataRendererBase
                 }
                 
                 guard let e = dataSet.entryForIndex(j) else { continue }
+
+                // draw only if the value is greater than zero
+                if ((abs(e.value) <= 0.000001)) {
+                    xIndex += 1
+                    continue
+                }
                 
                 if (xIndex == 0)
                 {
